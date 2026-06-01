@@ -1,2 +1,17 @@
 # SmartWardrobe
-wardrobe which is able to generate different outfits by users's clothes
+
+Умный гардероб с AI-рекомендациями.
+
+## MVP
+
+- Регистрация
+- Авторизация
+- Добавление одежды
+- Загрузка фотографий
+- Генерация образов
+
+## Stack
+
+- Django REST Framework
+- Angular
+- PostgreSQL
