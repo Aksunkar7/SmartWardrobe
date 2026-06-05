@@ -4,4 +4,4 @@ from .models import WardrobeItem
 class WardrobeItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = WardrobeItem
-        fields = '__all__'
+        exclude = ('user',)
