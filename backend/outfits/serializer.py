@@ -19,5 +19,5 @@ class OutfitWriteSerializer(ModelSerializer):
     items = PrimaryKeyRelatedField(queryset=WardrobeItem.objects.all(), many=True)
     class  Meta:
         model = Outfit
-        fields = '__all__'
+        exclude = ('user',)
         
