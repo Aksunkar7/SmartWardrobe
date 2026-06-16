@@ -5,17 +5,17 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () => import('./features/auth/login/login')
-      .then(m => m.LoginComponent)
+      .then(m => m.Login)
   },
   {
     path: 'register',
     loadComponent: () => import('./features/auth/register/register')
-      .then(m => m.RegisterComponent)
+      .then(m => m.Register)
   },
   {
     path: 'wardrobe',
     loadComponent: () => import('./features/wardrobe/wardrobe')
-      .then(m => m.WardrobeComponent),
+      .then(m => m.Wardrobe),
     canActivate: [authGuard]   
   },
   {
