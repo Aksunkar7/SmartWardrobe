@@ -1,1 +1,42 @@
-<p>register works!</p>
+<div class="register-container">
+    <h2>Регистрация</h2>
+  
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  
+      <div>
+        <input
+          formControlName="username"
+          type="text"
+          placeholder="Username"
+        />
+      </div>
+  
+      <div>
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="Email"
+        />
+      </div>
+  
+      <div>
+        <input
+          formControlName="password"
+          type="password"
+          placeholder="Пароль"
+        />
+      </div>
+  
+      @if (errorMessage) {
+        <p>{{ errorMessage }}</p>
+      }
+  
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Загрузка...' : 'Зарегистрироваться' }}
+      </button>
+  
+    </form>
+  
+    <a (click)="router.navigate(['/login'])">Уже есть аккаунт? Войти</a>
+  
+  </div>
