@@ -25,6 +25,7 @@
         @if (item.image) {
             <img [src]="'http://localhost:8000' + item.image" [alt]='item.name' width='150'/>
         }
+        <button (click)="onDelete(item.id)">Удалить</button>
       </div>
     }
   </div>

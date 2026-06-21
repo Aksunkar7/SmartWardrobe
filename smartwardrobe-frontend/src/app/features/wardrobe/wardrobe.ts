@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
-import { WardrobeService, WardrobeItem } from '../../core/services/wardrobe';
 import { RouterLink } from '@angular/router';
+import { WardrobeService, WardrobeItem } from '../../core/services/wardrobe';
 
 @Component({
   selector: 'app-wardrobe',
@@ -28,11 +28,27 @@ export class Wardrobe implements OnInit {
       next: (data) => {
         this.items = data;
         this.isLoading = false;
-        this.cdr.detectChanges();  // ← говорим Angular перерисовать
+        this.cdr.detectChanges();
       },
       error: () => {
         this.errorMessage = 'Ошибка загрузки гардероба';
         this.isLoading = false;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  onDelete(id: number): void {
+    const confirmed = confirm('Удалить эту вещь?');
+    if (!confirmed) return;
+
+    this.wardrobeService.deleteItem(id).subscribe({
+      next: () => {
+        this.items = this.items.filter(item => item.id !== id);
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.errorMessage = 'Ошибка при удалении вещи';
         this.cdr.detectChanges();
       }
     });
