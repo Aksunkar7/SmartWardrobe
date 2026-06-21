@@ -1,1 +1,30 @@
-<p>wardrobe works!</p>
+<div class="wardrobe-container">
+    <h2>Мой гардероб</h2>
+
+    <a routerLink='/wardrobe/add'>+ Add item</a>  
+
+    @if (isLoading) {
+      <p>Загрузка...</p>
+    }
+  
+    @if (errorMessage) {
+      <p>{{ errorMessage }}</p>
+    }
+  
+    @if (!isLoading && items.length === 0) {
+      <p>Гардероб пуст. Добавьте первую вещь!</p>
+    }
+  
+    @for (item of items; track item.id) {
+      <div class="wardrobe-item">
+        
+        <h3>{{ item.name }}</h3>
+        <p>Категория: {{ item.category }}</p>
+        <p>Цвет: {{ item.color }}</p>
+        <p>Сезон: {{ item.season }}</p>
+        @if (item.image) {
+            <img [src]="'http://localhost:8000' + item.image" [alt]='item.name' width='150'/>
+        }
+      </div>
+    }
+  </div>

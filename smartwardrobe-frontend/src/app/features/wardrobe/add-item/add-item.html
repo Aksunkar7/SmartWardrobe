@@ -1,0 +1,61 @@
+<div class="add-item-container">
+    <h2>Добавить вещь</h2>
+  
+    <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+  
+      <div>
+        <input
+          formControlName="name"
+          type="text"
+          placeholder="Название"
+        />
+      </div>
+  
+      <div>
+        <select formControlName="category">
+          <option value="">Выберите категорию</option>
+          <option value="top">Top</option>
+          <option value="bottom">Bottom</option>
+          <option value="shoes">Shoes</option>
+          <option value="accessory">Accessory</option>
+        </select>
+      </div>
+      
+      
+  
+      <div>
+        <input
+          formControlName="color"
+          type="text"
+          placeholder="Цвет"
+        />
+      </div>
+  
+      <div>
+        <select formControlName="season">
+          <option value="">Выберите сезон</option>
+          <option value="summer">Summer</option>
+          <option value="winter">Winter</option>
+          <option value="spring">Spring</option>
+          <option value="autumn">Autumn</option>
+        </select>
+      </div>
+  
+      <div>
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+        />
+      </div>
+  
+      @if (errorMessage) {
+        <p>{{ errorMessage }}</p>
+      }
+  
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Загрузка...' : 'Добавить' }}
+      </button>
+  
+    </form>
+  </div>

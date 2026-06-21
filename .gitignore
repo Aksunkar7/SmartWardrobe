@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+db.sqlite3
+
+# Media (загруженные пользователями файлы — не нужно коммитить)
+backend/media/
+
+# Node / Angular
+node_modules/
+.angular/
+dist/
+
+# IDE
+.vscode/
+.idea/

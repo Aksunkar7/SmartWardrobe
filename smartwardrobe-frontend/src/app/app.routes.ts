@@ -22,5 +22,11 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  }
+  },
+  {
+    path: 'wardrobe/add',
+    loadComponent: () => import('./features/wardrobe/add-item/add-item')
+      .then(m => m.AddItem),
+    canActivate: [authGuard]
+  },
 ];

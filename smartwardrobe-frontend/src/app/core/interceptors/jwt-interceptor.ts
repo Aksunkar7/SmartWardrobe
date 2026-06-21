@@ -9,7 +9,7 @@ export const jwtInterceptor: HttpInterceptorFn = (
   const tokenService = inject(Token);
   const token = tokenService.getAccess();
 
-  const isAuthEndpoint = req.url.includes('/api/auth/token/') || 
+  const isAuthEndpoint = req.url.includes('/api/auth/token/') ||
                          req.url.includes('/api/auth/register/');
 
   if (token && !isAuthEndpoint) {

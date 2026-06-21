@@ -14,11 +14,11 @@ export class Token {
   }
   
   getAccess(): string | null {
-    return this.ACCESS_KEY;
+    return localStorage.getItem(this.ACCESS_KEY);
   }
-
+  
   getRefresh(): string | null {
-    return this.REFRESH_KEY;
+    return localStorage.getItem(this.REFRESH_KEY);
   }
 
   clear(): void {
