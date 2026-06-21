@@ -1,10 +1,11 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { WardrobeService, WardrobeItem } from '../../core/services/wardrobe';
+import { Navbar } from '../../shared/components/navbar/navbar';
 
 @Component({
   selector: 'app-wardrobe',
-  imports: [RouterLink],
+  imports: [RouterLink, Navbar],
   templateUrl: './wardrobe.html',
   styleUrl: './wardrobe.scss',
 })

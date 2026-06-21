@@ -2,10 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WardrobeService } from '../../../core/services/wardrobe';
-
+import { Navbar } from '../../../shared/components/navbar/navbar';
 @Component({
   selector: 'app-edit-item',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Navbar],
   templateUrl: './edit-item.html',
   styleUrl: './edit-item.scss',
 })
