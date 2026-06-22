@@ -2,6 +2,7 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { WardrobeService, WardrobeItem } from '../../core/services/wardrobe';
 import { Navbar } from '../../shared/components/navbar/navbar';
+import { environment } from '../../../environments/environment'; 
 
 @Component({
   selector: 'app-wardrobe',
@@ -10,6 +11,7 @@ import { Navbar } from '../../shared/components/navbar/navbar';
   styleUrl: './wardrobe.scss',
 })
 export class Wardrobe implements OnInit {
+  apiUrl = environment.apiUrl;
 
   private wardrobeService = inject(WardrobeService);
   private cdr = inject(ChangeDetectorRef);

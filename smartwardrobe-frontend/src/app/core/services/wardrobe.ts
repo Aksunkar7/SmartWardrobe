@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface WardrobeItem {
   id: number;
@@ -17,7 +18,7 @@ export interface WardrobeItem {
 })
 export class WardrobeService {
 
-  private readonly API = 'http://localhost:8000/api/wardrobe';
+  private readonly API = `${environment.apiUrl}/api/wardrobe`;
   private http = inject(HttpClient);
 
   getItems(): Observable<WardrobeItem[]> {

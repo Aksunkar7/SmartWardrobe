@@ -28,7 +28,7 @@
         @for (item of outfit.items; track item.id) {
           <div class="outfit-item">
             @if (item.image) {
-              <img [src]="'http://localhost:8000' + item.image" [alt]="item.name" width="80" />
+                <img [src]="apiUrl + item.image" [alt]='item.name' width='150px'/>
             }
             <p>{{ item.name }}</p>
             <p>{{ item.category }}</p>

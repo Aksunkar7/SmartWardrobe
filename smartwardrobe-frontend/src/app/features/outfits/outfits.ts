@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { Outfit, OutfitModel } from '../../core/services/outfit';
 import { Navbar } from '../../shared/components/navbar/navbar';
 import { DatePipe } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-outfits',
@@ -11,7 +12,7 @@ import { DatePipe } from '@angular/common';
   styleUrl: './outfits.scss',
 })
 export class Outfits implements OnInit {
-
+  apiUrl = environment.apiUrl;
   private outfitService = inject(Outfit);
   private cdr = inject(ChangeDetectorRef);
 
