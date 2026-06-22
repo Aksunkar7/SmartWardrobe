@@ -57,7 +57,18 @@ export class EditItem implements OnInit {
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
+      const file = input.files[0];
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  
+      if (!allowedTypes.includes(file.type)) {
+        this.errorMessage = 'Только JPG, PNG или WEBP форматы разрешены';
+        input.value = '';
+        this.selectedFile = null;
+        return;
+      }
+  
+      this.errorMessage = '';
+      this.selectedFile = file;
     }
   }
 
