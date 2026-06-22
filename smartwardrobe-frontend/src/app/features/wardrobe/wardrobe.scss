@@ -1,0 +1,140 @@
+$primary: #1a1a2e;
+$accent: #e94560;
+$text-light: #ffffff;
+$card-bg: #ffffff;
+$text-dark: #333;
+$border: #eee;
+
+.wardrobe-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+
+  .wardrobe-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 1.8rem;
+      color: $primary;
+      font-weight: 700;
+    }
+
+    .add-btn {
+      background: $accent;
+      color: $text-light;
+      text-decoration: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.85;
+      }
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    color: #888;
+    font-size: 1.1rem;
+    margin-top: 4rem;
+  }
+
+  .wardrobe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .wardrobe-item {
+    background: $card-bg;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .item-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .item-placeholder {
+      width: 100%;
+      height: 200px;
+      background: $border;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 2rem;
+    }
+
+    .item-info {
+      padding: 1rem;
+
+      h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: $text-dark;
+        margin-bottom: 0.5rem;
+      }
+
+      .item-meta {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.8rem;
+
+        span {
+          background: $border;
+          color: #666;
+          padding: 0.2rem 0.6rem;
+          border-radius: 20px;
+          font-size: 0.75rem;
+        }
+      }
+
+      .item-actions {
+        display: flex;
+        gap: 0.5rem;
+
+        a, button {
+          flex: 1;
+          text-align: center;
+          padding: 0.4rem;
+          border-radius: 6px;
+          font-size: 0.85rem;
+          cursor: pointer;
+          transition: opacity 0.2s;
+          text-decoration: none;
+        }
+
+        a {
+          background: $primary;
+          color: $text-light;
+          border: none;
+
+          &:hover { opacity: 0.85; }
+        }
+
+        button {
+          background: $accent;
+          color: $text-light;
+          border: none;
+
+          &:hover { opacity: 0.85; }
+        }
+      }
+    }
+  }
+}

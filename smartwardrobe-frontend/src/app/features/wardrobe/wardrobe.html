@@ -1,35 +1,51 @@
 <app-navbar></app-navbar>
 
-
 <div class="wardrobe-container">
+
+  <div class="wardrobe-header">
     <h2>Мой гардероб</h2>
+    <a class="add-btn" routerLink="/wardrobe/add">+ Добавить вещь</a>
+  </div>
 
-    <a routerLink='/wardrobe/add'>+ Add item</a>  
+  @if (isLoading) {
+    <p>Загрузка...</p>
+  }
 
-    @if (isLoading) {
-      <p>Загрузка...</p>
-    }
-  
-    @if (errorMessage) {
-      <p>{{ errorMessage }}</p>
-    }
-  
-    @if (!isLoading && items.length === 0) {
-      <p>Гардероб пуст. Добавьте первую вещь!</p>
-    }
-  
+  @if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+  }
+
+  @if (!isLoading && items.length === 0) {
+    <p class="empty-state">Гардероб пуст. Добавьте первую вещь!</p>
+  }
+
+  <div class="wardrobe-grid">
     @for (item of items; track item.id) {
       <div class="wardrobe-item">
-        
-        <h3>{{ item.name }}</h3>
-        <p>Категория: {{ item.category }}</p>
-        <p>Цвет: {{ item.color }}</p>
-        <p>Сезон: {{ item.season }}</p>
+
         @if (item.image) {
-          <img [src]="apiUrl + item.image" [alt]='item.name' width='150px'/>
+          <img class="item-image" [src]="apiUrl + item.image" [alt]="item.name" />
+        } @else {
+          <div class="item-placeholder">👕</div>
         }
-        <button (click)="onDelete(item.id)">Удалить</button>
-        <a [routerLink]="['/wardrobe/edit', item.id]">Редактировать</a>
+
+        <div class="item-info">
+          <h3>{{ item.name }}</h3>
+
+          <div class="item-meta">
+            <span>{{ item.category }}</span>
+            <span>{{ item.color }}</span>
+            <span>{{ item.season }}</span>
+          </div>
+
+          <div class="item-actions">
+            <a [routerLink]="['/wardrobe/edit', item.id]">Редактировать</a>
+            <button (click)="onDelete(item.id)">Удалить</button>
+          </div>
+        </div>
+
       </div>
     }
   </div>
+
+</div>
