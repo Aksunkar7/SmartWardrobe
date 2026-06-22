@@ -13,7 +13,7 @@ export class Login {
 
   private fb = inject(FormBuilder);
   private authService = inject(Auth);
-  private router = inject(Router);
+  router = inject(Router);
 
   loginForm: FormGroup;
   errorMessage: string = '';

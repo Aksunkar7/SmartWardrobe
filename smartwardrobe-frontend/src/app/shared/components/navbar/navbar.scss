@@ -1,11 +1,60 @@
-.navbar{
+$primary: #1a1a2e;
+$accent: #e94560;
+$text-light: #ffffff;
+$hover: #16213e;
+
+.navbar {
+  background: $primary;
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  .brand {
+    color: $text-light;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    span {
+      color: $accent;
+    }
+  }
+
+  .nav-links {
     display: flex;
-    gap: 5px;
-}
-a{
-    gap: 10;
-    display: flex;
-}
-div{
-    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    a {
+      color: $text-light;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: background 0.2s;
+
+      &:hover {
+        background: $hover;
+      }
+    }
+
+    button {
+      background: $accent;
+      color: $text-light;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.85;
+      }
+    }
+  }
 }

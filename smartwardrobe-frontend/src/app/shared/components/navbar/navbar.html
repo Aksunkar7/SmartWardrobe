@@ -1,10 +1,12 @@
 <nav class="navbar">
-    <a routerLink="/wardrobe">SmartWardrobe</a>
-  
-    <div class="nav-links">
-      <a routerLink="/wardrobe">Гардероб</a>
-      <a routerLink="/outfits">Аутфиты</a>
-      <a routerLink="/profile">Профиль</a>
-      <button (click)="onLogout()">Выйти</button>
-    </div>
-  </nav>
+  <a class="brand" routerLink="/wardrobe">
+    Smart<span>Wardrobe</span>
+  </a>
+
+  <div class="nav-links">
+    <a routerLink="/wardrobe">Гардероб</a>
+    <a routerLink="/outfits">Аутфиты</a>
+    <a routerLink="/profile">Профиль</a>
+    <button (click)="onLogout()">Выйти</button>
+  </div>
+</nav>

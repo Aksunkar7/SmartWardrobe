@@ -1,31 +1,36 @@
 <div class="login-container">
-    <h2>Войти</h2>
-  
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  
-      <div>
-        <input
-          formControlName="username"
-          type="text"
-          placeholder="Username"
-        />
-      </div>
-  
-      <div>
-        <input
-          formControlName="password"
-          type="password"
-          placeholder="Пароль"
-        />
-      </div>
-  
-      @if (errorMessage) {
-        <p>{{ errorMessage }}</p>
-      }
-  
-      <button type="submit" [disabled]="isLoading">
-        {{ isLoading ? 'Загрузка...' : 'Войти' }}
-      </button>
-  
-    </form>
-  </div>
+  <h2>Smart<span>Wardrobe</span></h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <div>
+      <input
+        formControlName="username"
+        type="text"
+        placeholder="Username"
+      />
+    </div>
+
+    <div>
+      <input
+        formControlName="password"
+        type="password"
+        placeholder="Пароль"
+      />
+    </div>
+
+    @if (errorMessage) {
+      <p>{{ errorMessage }}</p>
+    }
+
+    <button type="submit" [disabled]="isLoading">
+      {{ isLoading ? 'Загрузка...' : 'Войти' }}
+    </button>
+
+  </form>
+  <a
+    (click)="router.navigate(['/register'])">
+    Нет аккаунта? Зарегистрироваться
+  </a>
+
+</div>
