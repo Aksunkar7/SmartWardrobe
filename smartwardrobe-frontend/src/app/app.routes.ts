@@ -29,11 +29,17 @@ export const routes: Routes = [
       .then(m => m.AddItem),
     canActivate: [authGuard]
   },
-  
+
   {
     path: 'wardrobe/edit/:id',
     loadComponent: () => import('./features/wardrobe/edit-item/edit-item')
       .then(m => m.EditItem),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'outfits',
+    loadComponent: () => import('./features/outfits/outfits')
+      .then(m => m.Outfits),
     canActivate: [authGuard]
   },
 ];
