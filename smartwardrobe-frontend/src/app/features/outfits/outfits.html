@@ -1,14 +1,16 @@
 <app-navbar></app-navbar>
 
 <div class="outfits-container">
-  <h2>Мои аутфиты</h2>
 
-  <button (click)="onGenerate()" [disabled]="isGenerating">
-    {{ isGenerating ? 'Генерация...' : 'Сгенерировать аутфит' }}
-  </button>
+  <div class="outfits-header">
+    <h2>Мои аутфиты</h2>
+    <button class="generate-btn" (click)="onGenerate()" [disabled]="isGenerating">
+      {{ isGenerating ? 'Генерация...' : '✨ Сгенерировать' }}
+    </button>
+  </div>
 
   @if (errorMessage) {
-    <p>{{ errorMessage }}</p>
+    <p class="error-message">{{ errorMessage }}</p>
   }
 
   @if (isLoading) {
@@ -16,28 +18,36 @@
   }
 
   @if (!isLoading && outfits.length === 0) {
-    <p>Аутфитов нет. Нажмите "Сгенерировать"!</p>
+    <p class="empty-state">Аутфитов нет. Нажмите "Сгенерировать"!</p>
   }
 
-  @for (outfit of outfits; track outfit.id) {
-    <div class="outfit-card">
-      <h3>{{ outfit.name }}</h3>
-      <p>Создан: {{ outfit.created_at | date:'dd.MM.yyyy' }}</p>
+  <div class="outfits-grid">
+    @for (outfit of outfits; track outfit.id) {
+      <div class="outfit-card">
 
-      <div class="outfit-items">
-        @for (item of outfit.items; track item.id) {
-          <div class="outfit-item">
-            @if (item.image) {
-                <img [src]="apiUrl + item.image" [alt]='item.name' width='150px'/>
-            }
-            <p>{{ item.name }}</p>
-            <p>{{ item.category }}</p>
-          </div>
-        }
+        <div class="outfit-header">
+          <h3>{{ outfit.name }}</h3>
+          <span class="outfit-date">{{ outfit.created_at | date:'dd.MM.yyyy' }}</span>
+        </div>
+
+        <div class="outfit-items">
+          @for (item of outfit.items; track item.id) {
+            <div class="outfit-item">
+              @if (item.image) {
+                <img [src]="apiUrl + item.image" [alt]="item.name" />
+              } @else {
+                <div class="item-placeholder">👕</div>
+              }
+              <p>{{ item.name }}</p>
+              <p class="item-category">{{ item.category }}</p>
+            </div>
+          }
+        </div>
+
+        <button class="delete-btn" (click)="onDelete(outfit.id)">Удалить</button>
+
       </div>
-
-      <button (click)="onDelete(outfit.id)">Удалить</button>
-    </div>
-  }
+    }
+  </div>
 
 </div>
