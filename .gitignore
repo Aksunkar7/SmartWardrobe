@@ -18,3 +18,5 @@ dist/
 # IDE / AI tools config
 .cursorrules
 docs/SmartWardrobeClassDiagram.drawio
+# Environment variables
+backend/.env
