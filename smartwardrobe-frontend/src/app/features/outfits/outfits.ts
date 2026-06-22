@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { Outfit, OutfitModel } from '../../core/services/outfit';
 import { Navbar } from '../../shared/components/navbar/navbar';
 import { DatePipe } from '@angular/common';
@@ -7,7 +6,7 @@ import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-outfits',
-  imports: [RouterLink, Navbar, DatePipe],
+  imports: [Navbar, DatePipe],
   templateUrl: './outfits.html',
   styleUrl: './outfits.scss',
 })
