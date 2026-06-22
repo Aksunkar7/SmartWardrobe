@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+
+<div class="profile-container">
+  <h2>Профиль</h2>
+
+  @if (isLoading) {
+    <p>Загрузка...</p>
+  }
+
+  @if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+  }
+
+  @if (user) {
+    <div class="profile-info">
+      <p>Имя пользователя: {{ user.username }}</p>
+      <p>Email: {{ user.email }}</p>
+    </div>
+  }
+
+</div>
