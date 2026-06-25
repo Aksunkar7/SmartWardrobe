@@ -130,5 +130,14 @@ class GenerateOutfitView(APIView):
             
         
         
+from .anthropic_service import get_outfit_recommendation
+
+class RecommendView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request):
+        wardrobe_items = WardrobeItem.objects.filter(user=request.user)
+        recommendation = get_outfit_recommendation(wardrobe_items)
+        return Response({'recommendation': recommendation})
         
         

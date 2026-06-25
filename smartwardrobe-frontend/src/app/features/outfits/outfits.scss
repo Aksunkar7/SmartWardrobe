@@ -151,3 +151,57 @@ $border: #eee;
     }
   }
 }
+.header-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.recommend-btn {
+  background: $primary;
+  color: $text-light;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover { opacity: 0.85; }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+.recommendation-card {
+  background: $card-bg;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid $primary;
+  white-space: pre-wrap;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $primary;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: $text-dark;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .close-btn {
+    background: none;
+    border: 1px solid $border;
+    color: #888;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+
+    &:hover { background: $border; }
+  }
+}

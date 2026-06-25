@@ -4,10 +4,23 @@
 
   <div class="outfits-header">
     <h2>Мои аутфиты</h2>
-    <button class="generate-btn" (click)="onGenerate()" [disabled]="isGenerating">
-      {{ isGenerating ? 'Генерация...' : '✨ Сгенерировать' }}
-    </button>
+    <div class="header-actions">
+      <button class="recommend-btn" (click)="onGetRecommendation()" [disabled]="isLoadingRecommendation">
+        {{ isLoadingRecommendation ? 'Анализирую...' : '🤖 AI рекомендация' }}
+      </button>
+      <button class="generate-btn" (click)="onGenerate()" [disabled]="isGenerating">
+        {{ isGenerating ? 'Генерация...' : '✨ Сгенерировать' }}
+      </button>
+    </div>
   </div>
+
+  @if (recommendation) {
+    <div class="recommendation-card">
+      <h3>🤖 Рекомендация AI стилиста</h3>
+      <div [innerHTML]="recommendationHtml"></div>
+      <button class="close-btn" (click)="recommendation = ''; recommendationHtml = ''">✕ Закрыть</button>
+    </div>
+  }
 
   @if (errorMessage) {
     <p class="error-message">{{ errorMessage }}</p>

@@ -34,4 +34,8 @@ export class Outfit {
   generateOutfit(): Observable<OutfitModel> {
     return this.http.post<OutfitModel>(`${this.API}/generate/`, {});
   }
+
+  getRecommendation(): Observable<{ recommendation: string}> {
+    return this.http.get<{ recommendation: string }>(`${this.API}/recommend/`);
+  }
 }

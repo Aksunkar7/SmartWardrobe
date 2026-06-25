@@ -1,8 +1,9 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Outfit, OutfitModel } from '../../core/services/outfit';
 import { Navbar } from '../../shared/components/navbar/navbar';
-import { DatePipe } from '@angular/common';
 import { environment } from '../../../environments/environment';
+import { marked } from 'marked';
 
 @Component({
   selector: 'app-outfits',
@@ -11,14 +12,17 @@ import { environment } from '../../../environments/environment';
   styleUrl: './outfits.scss',
 })
 export class Outfits implements OnInit {
-  apiUrl = environment.apiUrl;
+
   private outfitService = inject(Outfit);
   private cdr = inject(ChangeDetectorRef);
 
   outfits: OutfitModel[] = [];
   isLoading: boolean = false;
   isGenerating: boolean = false;
+  isLoadingRecommendation: boolean = false;
   errorMessage: string = '';
+  recommendation: string = '';
+  apiUrl = environment.apiUrl;
 
   ngOnInit(): void {
     this.loadOutfits();
@@ -70,8 +74,32 @@ export class Outfits implements OnInit {
         this.outfits = this.outfits.filter(o => o.id !== id);
         this.cdr.detectChanges();
       },
+      error: (err) => {
+        this.errorMessage = err.status === 404
+          ? 'Аутфит не найден или не принадлежит вам'
+          : 'Ошибка при удалении аутфита';
+        this.cdr.detectChanges();
+      }
+    });
+  }
+  recommendationHtml: string = '';
+
+  onGetRecommendation(): void {
+    this.isLoadingRecommendation = true;
+    this.recommendation = '';
+    this.recommendationHtml = '';
+    this.errorMessage = '';
+  
+    this.outfitService.getRecommendation().subscribe({
+      next: (data) => {
+        this.recommendation = data.recommendation;
+        this.recommendationHtml = marked(data.recommendation) as string;
+        this.isLoadingRecommendation = false;
+        this.cdr.detectChanges();
+      },
       error: () => {
-        this.errorMessage = 'Ошибка при удалении аутфита';
+        this.errorMessage = 'Ошибка при получении рекомендации';
+        this.isLoadingRecommendation = false;
         this.cdr.detectChanges();
       }
     });
