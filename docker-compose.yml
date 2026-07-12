@@ -1,0 +1,37 @@
+services:
+  db: 
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: smartwardrobe_db
+      POSTGRES_USER: smartwardrobe_user
+      POSTGRES_PASSWORD: secret123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U smartwardrobe_user -d smartwardrobe_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DEBUG: "True"
+      SECRET_KEY: 12345678
+      DB_HOST: db
+      DB_NAME: smartwardrobe_db
+      DB_USER: smartwardrobe_user
+      DB_PASSWORD: secret123
+    ports: 
+      - "8000:8000"
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             gunicorn --bind 0.0.0.0:8000 config.wsgi:application"
+volumes: 
+  postgres_data:
