@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: smartwardrobe_db
       POSTGRES_USER: smartwardrobe_user
-      POSTGRES_PASSWORD: secret123
+      POSTGRES_PASSWORD: smartwardrobe123
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -22,12 +22,13 @@ services:
       db:
         condition: service_healthy
     environment:
-      DEBUG: "True"
-      SECRET_KEY: 12345678
+      DEBUG: ${DEBUG}
+      SECRET_KEY: ${SECRET_KEY}
       DB_HOST: db
-      DB_NAME: smartwardrobe_db
-      DB_USER: smartwardrobe_user
-      DB_PASSWORD: secret123
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
     ports: 
       - "8000:8000"
     command: >
