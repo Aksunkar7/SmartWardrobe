@@ -38,11 +38,18 @@ services:
     volumes: 
       - static_files:/app/staticfiles
   
+  frontend:
+    build:
+      context: ./smartwardrobe-frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+
   nginx: 
     image: nginx:alpine
     restart: unless-stopped
     depends_on:
       - backend
+      - frontend
     ports:
       - "80:80"
     volumes: 
