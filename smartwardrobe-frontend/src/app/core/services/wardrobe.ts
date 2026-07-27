@@ -18,7 +18,7 @@ export interface WardrobeItem {
 })
 export class WardrobeService {
 
-  private readonly API = `${environment.apiUrl}/api/wardrobe`;
+  private readonly API = `${environment.apiUrl}/wardrobe`;
   private http = inject(HttpClient);
 
   getItems(): Observable<WardrobeItem[]> {

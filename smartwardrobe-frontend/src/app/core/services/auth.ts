@@ -24,7 +24,7 @@ interface LoginData {
   providedIn: 'root',
 })
 export class Auth {
-  private readonly API = `${environment.apiUrl}/api/auth`;
+  private readonly API = `${environment.apiUrl}/auth`;
 
   constructor (
     private http: HttpClient,

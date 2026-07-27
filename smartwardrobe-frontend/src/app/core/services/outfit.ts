@@ -16,7 +16,7 @@ export interface OutfitModel {
 })
 export class Outfit {
 
-  private readonly API = `${environment.apiUrl}/api/outfits`;
+  private readonly API = `${environment.apiUrl}/outfits`;
   private http = inject(HttpClient);
 
   getOutfits(): Observable<OutfitModel[]> {
