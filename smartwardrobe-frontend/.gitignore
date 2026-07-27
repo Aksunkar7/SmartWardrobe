@@ -43,6 +43,6 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-# npm (случайно запущенный в неправильной папке)
-package-lock.json
-package.json
+# Случайно созданные npm файлы в корне
+/package.json
+/package-lock.json

@@ -20,3 +20,6 @@ dist/
 docs/SmartWardrobeClassDiagram.drawio
 # Environment variables
 backend/.env
+.env
+backend/package.json
+backend/package-lock.json
