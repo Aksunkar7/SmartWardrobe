@@ -131,13 +131,22 @@ class GenerateOutfitView(APIView):
         
         
 from .anthropic_service import get_outfit_recommendation
+from django.core.cache import cache
 
 class RecommendView(APIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request):
+        cache_key = f"ai_recommendation:user:{request.user.id}"
+        cached = cache.get(cache_key)
+        if cached is not None:
+            return Response({'recommendation': cached, 'cached': True})
+        
         wardrobe_items = WardrobeItem.objects.filter(user=request.user)
         recommendation = get_outfit_recommendation(wardrobe_items)
-        return Response({'recommendation': recommendation})
+        
+        cache.set(cache_key, recommendation, timeout=3600)
+        
+        return Response({'recommendation': recommendation, 'cached': False})
         
         
