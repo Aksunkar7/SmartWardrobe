@@ -130,8 +130,9 @@ class GenerateOutfitView(APIView):
             
         
         
-from .anthropic_service import get_outfit_recommendation
+# from .anthropic_service import get_outfit_recommendation
 from django.core.cache import cache
+from .tasks import generate_recommendation_task
 
 class RecommendView(APIView):
     permission_classes = [IsAuthenticated]
@@ -142,11 +143,24 @@ class RecommendView(APIView):
         if cached is not None:
             return Response({'recommendation': cached, 'cached': True})
         
-        wardrobe_items = WardrobeItem.objects.filter(user=request.user)
-        recommendation = get_outfit_recommendation(wardrobe_items)
+        task = generate_recommendation_task.delay(request.user.id)
         
-        cache.set(cache_key, recommendation, timeout=3600)
-        
-        return Response({'recommendation': recommendation, 'cached': False})
+        return Response({'task_id': task.id}, status=status.HTTP_202_ACCEPTED)
         
         
+from celery.result import AsyncResult
+class TaskStatusView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, task_id):
+        result = AsyncResult(task_id)
+        
+        data = {'status': result.status}
+        
+        if result.status == 'SUCCESS':
+            data['result'] = result.result
+        elif result.status == 'FAILURE':
+            data['error'] = str(result.result)
+            
+        
+        return Response(data)
