@@ -38,8 +38,27 @@ services:
              python manage.py collectstatic --noinput &&
              gunicorn --bind 0.0.0.0:8000 config.wsgi:application"
     volumes: 
+      - ./backend:/app # bind mount - not to rebuild each time when developing. Changes happens at the time.
       - static_files:/app/staticfiles
   
+  celery_worker:
+    build: ./backend
+    command: celery -A config worker --loglevel=info
+    environment:
+      DEBUG: ${DEBUG}
+      SECRET_KEY: ${SECRET_KEY}
+      DB_HOST: db
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+      - redis
+
+
   frontend:
     build:
       context: ./smartwardrobe-frontend
