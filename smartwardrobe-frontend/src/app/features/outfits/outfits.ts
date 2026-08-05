@@ -92,16 +92,36 @@ export class Outfits implements OnInit {
   
     this.outfitService.getRecommendation().subscribe({
       next: (data) => {
-        this.recommendation = data.recommendation;
-        this.recommendationHtml = marked(data.recommendation) as string;
-        this.isLoadingRecommendation = false;
-        this.cdr.detectChanges();
+        if ('recommendation' in data) {
+          this.showRecommendation(data.recommendation);
+          return;
+        }
+  
+        this.outfitService.pollTaskStatus(data.task_id).subscribe({
+          next: (status) => {
+            if (status.status === 'SUCCESS' && status.result) {
+              this.showRecommendation(status.result);
+            } else if (status.status === 'FAILURE') {
+              this.showError(status.error ?? 'Не удалось сгенерировать рекомендацию');
+            }
+          },
+          error: () => this.showError('Ошибка при проверке статуса задачи'),
+        });
       },
-      error: () => {
-        this.errorMessage = 'Ошибка при получении рекомендации';
-        this.isLoadingRecommendation = false;
-        this.cdr.detectChanges();
-      }
+      error: () => this.showError('Ошибка при получении рекомендации'),
     });
+  }
+  
+  private showRecommendation(text: string): void {
+    this.recommendation = text;
+    this.recommendationHtml = marked(text) as string;
+    this.isLoadingRecommendation = false;
+    this.cdr.detectChanges();
+  }
+  
+  private showError(message: string): void {
+    this.errorMessage = message;
+    this.isLoadingRecommendation = false;
+    this.cdr.detectChanges();
   }
 }
